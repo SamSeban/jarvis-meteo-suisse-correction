@@ -1,3 +1,2 @@
-*NEIGE*MAINTENANT*==echo "$(jv_ms_sna_snow)"
 *METEO*ACTUEL*|*METEO*AUJOURD*==echo "$(jv_pg_ms_weather_now)"
 *METEO*DEMAIN*==echo "$(jv_pg_ms_weather_tomorrow)"

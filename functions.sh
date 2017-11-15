@@ -6,19 +6,6 @@
 # pg for PluGin
 # XX is a short code for your plugin, ex: ww for Weather Wunderground
 # You can use translations provided in the language folders functions.sh
-
-jv_pg_ms_snow() {
-	local json="$(curl -s https://www.prevision-meteo.ch/services/json/$jv_pg_ms_city)"
-	local match=""
-	match+="$(echo "$json" | jq -r "$match.current_condition.condition")"
-	if [[ $match =~ .*neige.* ]] #si neige existe dans text alors on allume
-	then
-		hue lights 1,2 on
-		say "Alerte ! tu dois te réveiller."
-		say "Voici les conditions météo actuelle :"
-		say "$match"
-	fi
-}
 jv_pg_ms_weather_now() {
 	local json="$(curl -s https://www.prevision-meteo.ch/services/json/$jv_pg_ms_city)"
 	local tmp=$(echo "$json" | jq -r "$match.current_condition.tmp")
@@ -55,5 +42,19 @@ jv_pg_ms_weather_today() {
 	if [[ $(echo "$json" | jq -r "$match.current_condition.condition") =~ .*pluie|averse.* ]]
 	then
 		say "Il faudra mettre ton pantalon de pluie"
+	fi
+}
+
+#PERSO alerte en cas de neige avec tache cron
+jv_pg_ms_snow() {
+	local json="$(curl -s https://www.prevision-meteo.ch/services/json/$jv_pg_ms_city)"
+	local match=""
+	match+="$(echo "$json" | jq -r "$match.current_condition.condition")"
+	if [[ $match =~ .*neige.* ]] #si neige existe dans text alors on allume
+	then
+		hue lights 1,2 on
+		say "Alerte ! tu dois te réveiller."
+		say "Voici les conditions météo actuelle :"
+		say "$match"
 	fi
 }
