@@ -19,8 +19,16 @@ Pour ajouter votre ville il suffit d'inscrire son nom dans le fichier config. Vo
 ou ici pour rechercher https://www.prevision-meteo.ch/services
 ## Usage
 ```
-Moi: quelle est la météo pour aujourd'hui ?
-Jarvis: output from Jarvis
+moi: quelle est la météo pour aujourd'hui
+jarvis: Voici les conditions météo actuelle :
+jarvis: Nuit claire et stratus.
+jarvis: Température 0 degré.
+jarvis: humidité 94 pourcent.
+
+moi: quelle est la météo pour demain
+jarvis: Voici les conditions météo pour demain :
+jarvis: Ensoleillé.
+jarvis: Température, minimum moins  3 degré, maximum  7 degré.
 ```
 
 ## Author
