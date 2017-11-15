@@ -29,6 +29,9 @@ moi: quelle est la météo pour demain
 jarvis: Voici les conditions météo pour demain :
 jarvis: Ensoleillé.
 jarvis: Température, minimum moins  3 degré, maximum  7 degré.
+
+moi:: est-ce qu'il va pleuvoir demain
+jarvis: Non
 ```
 
 ## Author
