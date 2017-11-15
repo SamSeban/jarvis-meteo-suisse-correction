@@ -44,7 +44,18 @@ jv_pg_ms_weather_today() {
 		say "Il faudra mettre ton pantalon de pluie"
 	fi
 }
-
+# Check si il pleut demain
+jv_pg_ms_weather_rain_tomorrow() {
+	local json="$(curl -s https://www.prevision-meteo.ch/services/json/$jv_pg_ms_city)"
+	local match=""
+	match+="$(echo "$json" | jq -r "$match.current_condition.condition")"
+	if [[ $match =~ .*pluie.* ]] #si pluie existe dans text alors oui
+	then
+		say "Oui, il va pleuvoir"
+	else
+		say "Non"
+	fi
+}
 #PERSO alerte en cas de neige avec tache cron
 jv_pg_ms_snow() {
 	local json="$(curl -s https://www.prevision-meteo.ch/services/json/$jv_pg_ms_city)"
