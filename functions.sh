@@ -12,12 +12,12 @@ jv_pg_ms_weather_now() {
 	say "Voici les conditions météo actuelle :"
 	say "$(echo "$json" | jq -r "$match.current_condition.condition")." #exemple nuit clair et stratus
 	say "Température $(echo "$tmp" | sed -r 's/[-]+/moins  /g' ) degré." #on remplace tiret par moins 
-	say "humidité $(echo "$json" | jq -r "$match.current_condition.humidity") pourcent." #on remplace tiret par moins
+	say "Humidité à $(echo "$json" | jq -r "$match.current_condition.humidity") pourcent." #on remplace tiret par moins
 
 	#on va donner des conseils maintenant
 	if [[ $(echo "$json" | jq -r "$match.current_condition.condition") =~ .*pluie|averse.* ]]
 	then
-		say "pense à prendre un parapluie"
+		say "Pense à prendre un parapluie."
 	fi
 }
 jv_pg_ms_weather_tomorrow() {
