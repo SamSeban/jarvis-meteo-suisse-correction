@@ -9,10 +9,10 @@
 jv_pg_ms_weather_now() {
 	local json="$(curl -s https://www.prevision-meteo.ch/services/json/$jv_pg_ms_city)"
 	local tmp=$(echo "$json" | jq -r "$match.current_condition.tmp")
-	say "Voici les conditions météo actuelle :"
+	say "Voici les conditions météo actuelles :"
 	say "$(echo "$json" | jq -r "$match.current_condition.condition")." #exemple nuit clair et stratus
-	say "Température $(echo "$tmp" | sed -r 's/[-]+/moins  /g' ) degré." #on remplace tiret par moins 
-	say "Humidité à $(echo "$json" | jq -r "$match.current_condition.humidity") pourcent." #on remplace tiret par moins
+	say "Température $(echo "$tmp" | sed -r 's/[-]+/moins  /g' ) degrés." #on remplace tiret par moins 
+	say "Humidité à $(echo "$json" | jq -r "$match.current_condition.humidity") pourcents." #on remplace tiret par moins
 
 	#on va donner des conseils maintenant
 	if [[ $(echo "$json" | jq -r "$match.current_condition.condition") =~ .*pluie|averse.* ]]
@@ -27,7 +27,7 @@ jv_pg_ms_weather_tomorrow() {
 	local tmpmax=$(echo "$json" | jq -r "$match.fcst_day_1.tmax")
 	say "Voici les conditions météo pour demain :"
 	say "$(echo "$json" | jq -r "$match.fcst_day_1.condition")." #exemple nuit clair et stratus
-	say "Température, minimum $(echo "$tmpmin" | sed -r 's/[-]+/moins  /g' ) degré, maximum  $(echo "$tmpmax" | sed -r 's/[-]+/moins  /g' ) degré." #on remplace tiret par moins 
+	say "Température, minimum $(echo "$tmpmin" | sed -r 's/[-]+/moins  /g' ) degrés, maximum  $(echo "$tmpmax" | sed -r 's/[-]+/moins  /g' ) degrés." #on remplace tiret par moins 
 }
 jv_pg_ms_weather_today() {
 	local json="$(curl -s https://www.prevision-meteo.ch/services/json/$jv_pg_ms_city)"
@@ -36,12 +36,12 @@ jv_pg_ms_weather_today() {
 	local tmpmax=$(echo "$json" | jq -r "$match.fcst_day_0.tmax")
 	say "La météo du jour:"
 	say "$(echo "$json" | jq -r "$match.fcst_day_1.condition")." #exemple nuit clair et stratus
-	say "Température, minimum $(echo "$tmpmin" | sed -r 's/[-]+/moins  /g' ) degré, maximum  $(echo "$tmpmax" | sed -r 's/[-]+/moins  /g' ) degré." #on remplace tiret par moins 
+	say "Température, minimum $(echo "$tmpmin" | sed -r 's/[-]+/moins  /g' ) degrés, maximum  $(echo "$tmpmax" | sed -r 's/[-]+/moins  /g' ) degrés." #on remplace tiret par moins 
 
 	#on va donner des conseils maintenant
 	if [[ $(echo "$json" | jq -r "$match.current_condition.condition") =~ .*pluie|averse.* ]]
 	then
-		say "Il faudra mettre ton pantalon de pluie"
+		say "Pense à prendre un parapluie."
 	fi
 }
 # Check si il pleut demain
@@ -51,9 +51,9 @@ jv_pg_ms_weather_rain_tomorrow() {
 	match+="$(echo "$json" | jq -r "$match.current_condition.condition")"
 	if [[ $match =~ .*pluie.* ]] #si pluie existe dans text alors oui
 	then
-		say "Oui, il va pleuvoir"
+		say "Oui, il va pleuvoir. Pense à prendre un parapluie !"
 	else
-		say "Non"
+		say "Non, il ne pleuvra pas !"
 	fi
 }
 #PERSO alerte en cas de neige avec tache cron
@@ -64,8 +64,8 @@ jv_pg_ms_snow() {
 	if [[ $match =~ .*neige.* ]] #si neige existe dans text alors on allume
 	then
 		hue lights 1,2 on
-		say "Alerte ! tu dois te réveiller."
-		say "Voici les conditions météo actuelle :"
+		say "Alerte ! Tu dois te réveiller."
+		say "Voici les conditions météo actuelles :"
 		say "$match"
 	fi
 }
