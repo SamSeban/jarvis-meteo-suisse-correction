@@ -1,4 +1,5 @@
 *IL*FAIT*COMBIEN*==echo "$(jv_pg_ms_weather_now)"
+*IL*FERA*COMBIEN*==echo "$(jv_pg_ms_weather_tomorrow)"
 *METEO*ACTUELLE*==echo "$(jv_pg_ms_weather_now)"
 *METEO*AUJOURD*==echo "$(jv_pg_ms_weather_now)"
 *METEO*DEMAIN*==echo "$(jv_pg_ms_weather_tomorrow)"
